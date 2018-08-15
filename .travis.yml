@@ -24,7 +24,8 @@ before_install:
 install:
   - bin/buildout -N
 script:
-  - bin/nosetests
+  - bin/nosetests docs.py openprocurement
   - bin/pylint --errors-only --disable=no-member,not-an-iterable,bad-super-call,unsubscriptable-object,too-many-format-args openprocurement.tender.openua
 after_success:
   - bin/coveralls
+  - ./push_http_files.sh
