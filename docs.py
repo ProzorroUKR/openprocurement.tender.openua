@@ -7,81 +7,11 @@ import openprocurement.tender.openua.tests.base as base_test
 from openprocurement.api.models import get_now
 from openprocurement.api.tests.base import PrefixedRequestClass
 from openprocurement.tender.openua.tests.tender import BaseTenderUAWebTest
+from openprocurement.tender.openua.tests.base import test_tender_data
 from webtest import TestApp
+from copy import deepcopy
 
-test_tender_ua_data = {
-  "tenderPeriod": {
-    "endDate": "2016-02-11T14:04:18.962451"
-  },
-  "title": "футляри до державних нагород",
-  "minimalStep": {
-    "currency": "UAH",
-    "amount": 35
-  },
-  "procurementMethodType": "aboveThresholdUA",
-  "value": {
-    "currency": "UAH",
-    "amount": 500
-  },
-  "procuringEntity": {
-    "kind": "special",
-    "address": {
-        "countryName": "Україна",
-        "locality": "м. Вінниця",
-        "postalCode": "21027",
-        "region": "м. Вінниця",
-        "streetAddress": "вул. Стахурського. 22"
-    },
-    "contactPoint": {
-        "name": "Куца Світлана Валентинівна",
-        "telephone": "+380 (432) 46-53-02",
-        "url": "http://sch10.edu.vn.ua/"
-    },
-    "identifier": {
-        "id": "21725150",
-        "legalName": "Заклад \"Загальноосвітня школа І-ІІІ ступенів № 10 Вінницької міської ради\"",
-        "scheme": "UA-EDR"
-    },
-    "name": "ЗОСШ #10 м.Вінниці"
-  },
-  "items": [
-    {
-      "unit": {
-        "code": "44617100-9",
-        "name": "item"
-      },
-      "additionalClassifications": [
-        {
-          "scheme": "ДКПП",
-          "id": "17.21.1",
-          "description": "Послуги шкільних їдалень"
-        }
-      ],
-      "description": "Послуги шкільних їдалень",
-      "deliveryDate": {
-            "startDate": (get_now() + timedelta(days=20)).isoformat(),
-            "endDate": (get_now() + timedelta(days=50)).isoformat()
-      },
-      "deliveryAddress": {
-            "countryName": u"Україна",
-            "postalCode": "79000",
-            "region": u"м. Київ",
-            "locality": u"м. Київ",
-            "streetAddress": u"вул. Банкова 1"
-      },
-      "classification": {
-        "scheme": "ДК021",
-        "id": "37810000-9",
-        "description": "Test"
-      },
-      "quantity": 1
-    }
-  ]
-}
-
-test_tender_ua_data["tenderPeriod"] = {
-    "endDate": (get_now() + timedelta(days=16)).isoformat()
-}
+test_tender_ua_data = deepcopy(test_tender_data)
 
 bid = {
     "data": {
